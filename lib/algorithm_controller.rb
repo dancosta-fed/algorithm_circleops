@@ -1,4 +1,5 @@
 require_relative 'algorithm_view'
+require 'pry-byebug'
 class Algorithm
   def initialize
     @view = View.new
@@ -7,6 +8,11 @@ class Algorithm
   def numbers
     @numbers = @view.main_quesiton
     display
+    multiplication
+    add
+    mod
+    final_result
+    isbn_number
   end
 
   def multiplication
@@ -27,26 +33,31 @@ class Algorithm
   end
 
   def final_result
-    @final_result = if @mod == 10
-                      0
-                    else
-                      10 - @mod
-                    end
-    @final_result
+    if mod == 10
+      @final_result = 0
+    else
+      @final_result = 10 - mod
+    end
   end
 
-  def final_number
-    numbers.append(@final_result)
+  def isbn_number
+    @result = @numbers.append(@final_result)
+    result
   end
 
   private
 
   def display
     p '___________________________'
-    p ''
+    p
     p 'Here are your numbers:'
     p @numbers
-    p ''
+  end
+
+  def result
     p 'loading...'
+    p 'Here is your ISBN:'
+    p @result
+    p '--END--'
   end
 end

@@ -1,7 +1,7 @@
 class Router
-  def initialize(controller)
-    @controller = controller
-    @running    = true
+  def initialize(algorithm_controller)
+    @algorithm_controller = algorithm_controller
+    @running = true
   end
 
   def run
@@ -9,24 +9,20 @@ class Router
     puts '== Thanks for trying this out =='
     puts '           --           '
 
-    while @running
-      display_tasks
-      action = gets.chomp.to_i
-      print `clear`
-      route_action(action)
-    end
+    display_tasks
+    action = gets.chomp.to_i
+    print `clear`
+    route_action(action)
   end
 
   private
 
   def route_action(action)
     case action
-    when 1 then @controller.numbers
-    when 2 then @controller.create
-    when 3 then @controller.destroy
-    when 4 then stop
+    when 1 then @algorithm_controller.numbers
+    when 2 then stop
     else
-      puts "Please press 1, 2, 3 or 4"
+      puts 'Please press 1 or 2'
     end
   end
 
@@ -35,11 +31,9 @@ class Router
   end
 
   def display_tasks
-    puts ""
-    puts "Shall we start?"
-    puts "1 - Yes"
-    # puts "2 - Create a new recipe"
-    # puts "3 - Destroy a recipe"
-    puts "4 - Stop and exit the program"
+    puts ''
+    puts 'Shall we start?'
+    puts '1 - Yes'
+    puts '2 - Stop and exit the program'
   end
 end
