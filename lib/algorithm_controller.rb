@@ -1,5 +1,6 @@
+# require 'pry-byebug'
 require_relative 'algorithm_view'
-require 'pry-byebug'
+
 class Algorithm
   def initialize
     @view = View.new
