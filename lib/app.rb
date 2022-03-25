@@ -1,4 +1,4 @@
-require 'rspec/autorun'
+# require 'rspec/autorun'
 require_relative 'algorithm_controller'
 require_relative 'router'
 

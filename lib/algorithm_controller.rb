@@ -2,18 +2,21 @@
 require_relative 'algorithm_view'
 
 class Algorithm
+  attr_accessor :numbers
+
   def initialize
     @view = View.new
+    @numbers = @view.main_quesiton
+    reset_numbers # conditional
+    @isbn = calculate_isbn
   end
 
-  def numbers
-    @numbers = @view.main_quesiton
-    display
-    multiplication
-    add
-    mod
-    final_result
-    isbn_number
+  def twelve_digits?
+    @numbers.size == 12
+  end
+
+  def reset_numbers
+    @numbers = @view.main_quesiton unless twelve_digits?
   end
 
   def multiplication
@@ -34,16 +37,25 @@ class Algorithm
   end
 
   def final_result
-    if mod == 10
-      @final_result = 0
-    else
-      @final_result = 10 - mod
-    end
+    @final_result = if mod == 10
+                      0
+                    else
+                      10 - mod
+                    end
   end
 
   def isbn_number
-    @result = @numbers.append(@final_result)
+    @result = @numbers.append(@final_result).join.to_i
     result
+  end
+
+  def calculate_isbn
+    display
+    multiplication
+    add
+    mod
+    final_result
+    isbn_number
   end
 
   private
