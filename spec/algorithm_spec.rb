@@ -1,13 +1,10 @@
 require 'spec_helper'
-require File.join(File.dirname(__FILE__), '../lib/algorithm_controller.rb')
+require File.join(File.dirname(__FILE__), '../lib/algorithm.rb')
 
 RSpec.describe Algorithm do
-  # let(Algorithm)
-
-  describe 'check if @numbers' do
-
-    let(:algorithm) { Algorithm.new }
-    algo = Algorithm.new
+  let(:algorithm) { Algorithm.new }
+  
+  describe 'ISBN number format' do
     it 'has twelve digits' do
       expect(algorithm.twelve_digits?).to be(true)
     end
@@ -25,7 +22,7 @@ RSpec.describe Algorithm do
     end
 
     it 'Subtracts 10 and if the end number is 10, make it 0. Then add result to number' do
-      expect(algorithm.final_result.size).to be(13)
+      expect(algorithm.isbn_number).to be(true)
     end
   end
 end

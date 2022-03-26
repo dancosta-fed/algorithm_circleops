@@ -2,13 +2,12 @@
 require_relative 'algorithm_view'
 
 class Algorithm
-  attr_accessor :numbers
+  attr_accessor :numbers, :new_arr, :result, :mod, :final_result, :isbn
 
   def initialize
     @view = View.new
     @numbers = @view.main_quesiton
     reset_numbers # conditional
-    @isbn = calculate_isbn
   end
 
   def twelve_digits?
@@ -29,28 +28,35 @@ class Algorithm
   end
 
   def add
+    multiplication
     @result = @new_arr.sum
   end
 
   def mod
+    add
     @mod = @result % 10
   end
 
   def final_result
-    @final_result = if mod == 10
-                      0
-                    else
-                      10 - mod
-                    end
+    mod
+    if mod == 10
+      @final_result = 0
+    else
+      @final_result = 10 - mod
+    end
   end
 
   def isbn_number
-    @result = @numbers.append(@final_result).join.to_i
-    result
+    final_result
+    @isbn = @numbers.append(@final_result).join.to_i
+    thirteen_digits?
+  end
+
+  def thirteen_digits?
+    @isbn.size == 13
   end
 
   def calculate_isbn
-    display
     multiplication
     add
     mod
@@ -58,19 +64,19 @@ class Algorithm
     isbn_number
   end
 
-  private
+  # private
 
-  def display
-    p '___________________________'
-    p
-    p 'Here are your numbers:'
-    p @numbers
-  end
+  # def display
+  #   p '___________________________'
+  #   p
+  #   p 'Here are your numbers:'
+  #   p @numbers
+  # end
 
-  def result
-    p 'loading...'
-    p 'Here is your ISBN:'
-    p @result
-    p '--END--'
-  end
+  # def result
+  #   p 'loading...'
+  #   p 'Here is your ISBN:'
+  #   p @result
+  #   p '--END--'
+  # end
 end
