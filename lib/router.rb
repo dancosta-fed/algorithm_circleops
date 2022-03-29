@@ -7,9 +7,6 @@ class Router
   end
 
   def run
-    puts 'Hey, My name is Daniel.'
-    puts '== Thanks for trying this out =='
-    puts '           --           '
     route_action
   end
 

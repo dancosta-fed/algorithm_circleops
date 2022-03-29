@@ -9,12 +9,9 @@ class IsbnController
     @view = IsbnView.new
     digits = @view.main_question(:digits)
     @numbers = Isbn.new(digits: digits)
+    twelve_digits?
+    reset_numbers
   end
-
-  # def new_values
-  #   digits = @view.main_question(:digits)
-  #   @numbers = Isbn.new(digits: digits)
-  # end
 
   def twelve_digits?
     @numbers.digits.size == 12
@@ -35,28 +32,26 @@ class IsbnController
 
   def add
     multiplication
-    result = @new_arr.sum
+    @result = @new_arr.sum
   end
 
-  def mod(result)
+  def mod
     add
-    mod = result % 10
+    @mod = @result % 10
   end
 
-  def final_result(mod)
+  def final_result
     mod
-    if mod == 10
-      final_result = 0
+    if @mod == 10
+      @final_result = 0
     else
-      final_result = 10 - mod
+      @final_result = 10 - @mod
     end
   end
 
-  def isbn_number(final_result)
+  def isbn_number
     final_result
-    @isbn = @numbers.digits.append(final_result).join.to_i
-    thirteen_digits?
-    result
+    @isbn = @numbers.digits.append(@final_result).join.to_i
   end
 
   def thirteen_digits?
@@ -64,12 +59,13 @@ class IsbnController
   end
 
   def calculate_isbn
-    new_values
+    display
     multiplication
     add
     mod
     final_result
     isbn_number
+    result
   end
 
   private
@@ -78,13 +74,12 @@ class IsbnController
     p '___________________________'
     p
     p 'Here are your numbers:'
-    p @numbers.to_s
+    p @numbers.digits
   end
 
   def result
     p 'loading...'
     p 'Here is your ISBN:'
     p @isbn
-    p '--END--'
   end
 end
