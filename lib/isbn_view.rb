@@ -8,4 +8,9 @@ class IsbnView
     puts "Please give me a 12 #{digits} number"
     gets.chomp.to_i.digits.reverse
   end
+
+  def display_final_isbn(isbn)
+    puts 'Here is your isbn number:'
+    puts isbn.digits.join
+  end
 end
