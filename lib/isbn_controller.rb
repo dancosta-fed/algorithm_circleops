@@ -18,10 +18,11 @@ class IsbnController
     mod_of_digits = mod(sum_of_digits)
     final_digit = final_result(mod_of_digits)
     isbn = isbn_number(final_digit, isbn)
-    @view.display_final_isbn(isbn)
+    @view.display_final_isbn(isbn, multiplied_digits, sum_of_digits, mod_of_digits)
   end
 
-  # private
+  # Should be PRIVATE below this line.
+  # But I have to study a bit on how to call private methods on Rspec
 
   def twelve_digits?(isbn)
     isbn.digits.size == 12
